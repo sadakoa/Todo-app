@@ -1,0 +1,30 @@
+extends layouts/_layout.jade
+
+block append init
+  - pageTitle = '';
+  - bodyClass = '';
+
+block content
+  .l-side
+    h1.p-logo
+      | APP NAME
+    .p-task-wholeArea
+      a.c-button.is-create
+        | タスクの作成
+      p.p-task-wholeArea__text
+        a.p-task-wholeArea__text--anchor
+          | 全てのタスクを削除
+    .p-task-logArea
+      p.p-task-log
+        | タスクのログがここに入ります。
+      p.p-task-log
+        | タスクのログがここに入ります。
+      p.p-task-log
+        | タスクのログがここに入ります。
+      p.p-task-log
+        | タスクのログがここに入ります。
+      p.p-task-log
+        | タスクのログがここに入ります。
+    p.p-copyright
+      | Copyright © 2016 sadakoa All Rights Reserved.
+      
