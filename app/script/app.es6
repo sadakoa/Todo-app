@@ -5,6 +5,7 @@ import openModal from './modal.js'; // モーダル関数
 
 // 要素の初期化及び変数に格納=======================================
 let newTaskButton = $('.new-task-button');
+
 let storageData = localStorage.getItem('data');
 let parseData = JSON.parse(storageData);
 
