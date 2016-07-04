@@ -5,26 +5,112 @@ block append init
   - bodyClass = '';
 
 block content
-  .l-side
-    h1.p-logo
-      | APP NAME
-    .p-task-wholeArea
-      a.c-button.is-create
-        | タスクの作成
-      p.p-task-wholeArea__text
-        a.p-task-wholeArea__text--anchor
-          | 全てのタスクを削除
-    .p-task-logArea
-      p.p-task-log
-        | タスクのログがここに入ります。
-      p.p-task-log
-        | タスクのログがここに入ります。
-      p.p-task-log
-        | タスクのログがここに入ります。
-      p.p-task-log
-        | タスクのログがここに入ります。
-      p.p-task-log
-        | タスクのログがここに入ります。
-    p.p-copyright
-      | Copyright © 2016 sadakoa All Rights Reserved.
+  .l-wrapper
+    .l-side
+      .p-logo-area
+        img.p-logo-image(src="images/logo.png", alt="SQUIRREL" width="100")
+        h1.p-logo
+          | SQUIRREL
+      .p-task-wholeArea
+        a.c-button.is-create
+          | タスクの作成
+        p.p-task-wholeArea__text
+          a.p-task-wholeArea__text--anchor
+            | 全てのタスクを削除
+      .p-task-logArea
+        h2.p-task-logArea__title
+          | HISTORY (履歴)
+        .log-area
+          p.p-task-log
+            | タスクのログがここに入ります。
+          p.p-task-log
+            | タスクのログがここに入ります。
+          p.p-task-log
+            | タスクのログがここに入ります。
+          p.p-task-log
+            | タスクのログがここに入ります。
+          p.p-task-log
+            | タスクのログがここに入ります。
+      p.p-copyright
+        | Copyright © 2016 sadakoa All Rights Reserved.
+  
+    .l-main
+      .c-card.p-backlog-card
+        h2.c-card__title
+          | Backlog
+          i.c-card__edit
+            img(src='images/pen.svg' width="15")
+        a.p-task-addButton
+          img.p-task-addButton__img(src='images/plus.png' width="25")
+        ul.p-task-listArea
+          li.c-sticky.p-task-listarea__item
+            | 午後八時からお買い物
+            a.p-task-edit
+              img.p-task-edit__img(src="images/edit.png" width="20")
+          li.c-sticky.p-task-listarea__item
+            | Type something...
+            a.p-task-edit
+              img.p-task-edit__img(src="images/edit.png" width="20")
+          li.c-sticky.p-task-listarea__item
+            | Type something...
+            a.p-task-edit
+              img.p-task-edit__img(src="images/edit.png" width="20")
+          li.c-sticky.p-task-listarea__item
+            | Type something...
+            a.p-task-edit
+              img.p-task-edit__img(src="images/edit.png" width="20")
+              
+      .c-card.p-doing-card
+        h2.c-card__title
+          | Doing
+          i.c-card__edit
+            img(src='images/pen.svg' width="15")
+        a.p-task-addButton
+          img.p-task-addButton__img(src='images/plus.png' width="25")
+        ul.p-task-listArea
+          li.c-sticky.p-task-listarea__item
+            | Type something...
+            a.p-task-edit
+              | ･･･
+          li.c-sticky.p-task-listarea__item
+            | Type something...
+            a.p-task-edit
+              | ･･･
+          li.c-sticky.p-task-listarea__item
+            | Type something...
+            a.p-task-edit
+              | ･･･
+          li.c-sticky.p-task-listarea__item
+            | Type something...
+            a.p-task-edit
+              | ･･･
+              
+      .c-card.p-doin-card
+        h2.c-card__title
+          | Done
+          i.c-card__edit
+            img(src='images/pen.svg' width="15")
+        a.p-task-addButton
+          img.p-task-addButton__img(src='images/plus.png' width="25")
+        ul.p-task-listArea
+          li.c-sticky.p-task-listarea__item
+            | Type something...
+            a.p-task-edit
+              | ･･･
+          li.c-sticky.p-task-listarea__item
+            | Type something...
+            a.p-task-edit
+              | ･･･
+          li.c-sticky.p-task-listarea__item
+            | Type something...
+            a.p-task-edit
+              | ･･･
+          li.c-sticky.p-task-listarea__item
+            | Type something...
+            a.p-task-edit
+              | ･･･
+          
+      
+    
+    
       
