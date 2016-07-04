@@ -5,6 +5,28 @@ block append init
   - bodyClass = '';
 
 block content
+  
+  //- modal --------------------------------
+  .c-modal
+    .c-modal__content
+      a.c-modal__cancel
+        | ×
+      h3.c-modal__title
+        | タスクを作成する
+      .new-task-area
+        input.new-task-input(placeholder='タスク名を書いてください')
+        select.new-task-category
+          option(value="backlog")
+            | Backlog
+          option(value="doing")
+            | Doing
+          option(value="done")
+            | Done
+      button.c-button.is-create.new-task-saveButton
+        | タスクを作成
+              
+  //- modal --------------------------------
+
   .l-wrapper
     .l-side
       .p-logo-area
@@ -12,8 +34,8 @@ block content
         h1.p-logo
           | SQUIRREL
       .p-task-wholeArea
-        a.c-button.is-create
-          | タスクの作成
+        button.c-button.is-create
+          | タスクを作成
         p.p-task-wholeArea__text
           a.p-task-wholeArea__text--anchor
             | 全てのタスクを削除
@@ -47,6 +69,13 @@ block content
             | 午後八時からお買い物
             a.p-task-edit
               img.p-task-edit__img(src="images/edit.png" width="20")
+            //- modal --------------------------------
+            .c-edit-modal
+              a.c-edit-modal__text.is-edit
+                | 編集
+              a.c-edit-modal__text.is-remove
+                | 削除
+            //- modal --------------------------------
           li.c-sticky.p-task-listarea__item
             | Type something...
             a.p-task-edit
