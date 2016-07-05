@@ -1,5 +1,11 @@
+/**
+ * design - View
+ * モーダルに関するファイルです
+ */
+
 import $ from 'jquery';
-import sendStorage from './storage.js'; // localStorageを扱うモジュール
+import * as view from './view'; 
+
 /**
  * モーダル展開関数 - タスクを作成するを押した時に実行される
  * modal - コンテンツをくくっているdiv
@@ -36,7 +42,7 @@ const openModal = () => {
   // タスク作成ボタンを変数に格納
   let saveTaskButton = $('.new-task-saveButton');
   // 作成ボタンを押したら
-  saveTaskButton.on('click', addListItem);
+  saveTaskButton.on('click', view.addListItem);
 };
 
 // ----------------------------------------------------------------------------
@@ -48,26 +54,6 @@ const closeModal = () => {
   $('.c-modal').remove();
 };
 
-// ----------------------------------------------------------------------------
-
-/**
- * カードに作成したリストを追加する関数
- */
-const addListItem = () => {
-    // inputに記入された文字を変数に格納
-  let inputValue = $('.new-task-input').val();
-  // 選択されたoptionを変数に格納
-  let selectValue = $('.new-task-category').val();
-  let listItem = $(`
-    <li class="c-sticky p-task-listarea__item">${inputValue}<a class="p-task-edit">
-    <img src="images/edit.png" width="20" class="p-task-edit__img"></a></li>
-    `);
-  // モーダルを削除
-  $('.c-modal').remove();
-  // タスクをカードに追加
-  $('.p-task-listArea').append(listItem);
-  sendStorage(inputValue);
-};
 
 // ----------------------------------------------------------------------------
 

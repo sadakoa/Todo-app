@@ -1,7 +1,14 @@
+/**
+ * design - Model
+ * localStorageを操作するファイルです
+ */
+
 import $ from 'jquery';
 
-const sendStorage = (textData) => {
-  localStorage.setItem('data', JSON.stringify(textData));
-};
+// ========================================================================
 
-module.exports = sendStorage;
+
+// keyをdataにして配列をlocalStorageにpushする関数
+export function sendStorage(textData) {
+  localStorage.setItem('data', JSON.stringify(textData));
+}
