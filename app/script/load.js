@@ -10,19 +10,26 @@ import $ from 'jquery';
  * initialize - もしローカルストレージにデータがある場合、指定領域にリスト要素を生成する関数
  */
 export function initialize() {
-  let storageData = localStorage.getItem('data');
-  let parseData = JSON.parse(storageData);
-  if (parseData !== null) {
-    let cardArea = $('.p-task-listArea');
-    let listItem = $(`
-      <li class="c-sticky p-task-listarea__item">${parseData}<a class="p-task-edit">
-      <img src="images/edit.png" width="20" class="p-task-edit__img"></a></li>
-    `);
-    cardArea.append(listItem);
+  // 配列にあるデータの取得 & 文字列からオブジェクトにパース
+  let storageData = JSON.parse(localStorage.getItem('data'));
+
+  // リストを追加する場所
+  let cardArea = $('.p-backlog-card .p-task-listArea');
+
+  if (storageData !== null) {
+    for(let i=0; i < storageData.length; i++) {
+      // リスト要素の生成
+      let listItem = $(`
+        <li class="c-sticky p-task-listarea__item">${storageData[i].text}<a class="p-task-edit">
+        <img src="images/edit.png" width="20" class="p-task-edit__img"></a></li>
+      `);
+      // 追加
+      cardArea.append(listItem);
+    }
   }
-  console.info(storageData, parseData);
 }
 
+// ========================================================================
 
 /**
  * setEvent - イベントリスナーの初期化をまとめた関数
