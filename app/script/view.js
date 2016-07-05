@@ -1,10 +1,10 @@
 /**
  * design - View
- * DOM操作に関係するファイルです。
+ * DOM操作に関係するファイル
  */
 
 import $ from 'jquery';
-import { sendStorage } from './storage'; // localStorageを扱うモジュール
+import * as storage from './storage'; // localStorageを扱うモジュール
 
 // ========================================================================
 
@@ -25,5 +25,15 @@ let listItem = $(`
 $('.c-modal').remove();
 // タスクをカードに追加
 $('.p-task-listArea').append(listItem);
-sendStorage(inputValue);
+storage.sendStorage(inputValue);
+}
+
+
+/**
+ * 全てのリストを削除する関数
+ */
+export function removeAllListItem() {
+  console.log('削除されたよ全て');
+  $('.p-task-listArea').empty();
+storage.removeAllStorage();
 }

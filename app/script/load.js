@@ -1,5 +1,5 @@
 /**
- * HTML読み込み時に実行される処理をまとめたファイルです
+ * HTML読み込み時に実行される処理をまとめたファイル
  */
 
 import $ from 'jquery';
@@ -7,9 +7,9 @@ import $ from 'jquery';
 // ========================================================================
 
 /**
- * initialize - もしローカルストレージにデータがある場合、DOMに反映させる関数です
+ * initialize - もしローカルストレージにデータがある場合、指定領域にリスト要素を生成する関数
  */
-export default function initialize() {
+export function initialize() {
   let storageData = localStorage.getItem('data');
   let parseData = JSON.parse(storageData);
   if (parseData !== null) {
@@ -21,4 +21,12 @@ export default function initialize() {
     cardArea.append(listItem);
   }
   console.info(storageData, parseData);
+}
+
+
+/**
+ * setEvent - イベントリスナーの初期化をまとめた関数
+ */
+export function setEvent() {
+  console.log('Hello SQUIRREL');
 }

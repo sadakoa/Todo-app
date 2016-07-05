@@ -1,10 +1,10 @@
 /**
  * design - View
- * モーダルに関するファイルです
+ * モーダルに関するファイル
  */
 
 import $ from 'jquery';
-import * as view from './view'; 
+import * as view from './view';
 
 /**
  * モーダル展開関数 - タスクを作成するを押した時に実行される
