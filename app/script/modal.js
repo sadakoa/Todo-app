@@ -12,7 +12,7 @@ import * as view from './view';
  * modalContent - 内包する中身
  * modalCancel - モーダルを閉じるボタン
  */
-const openModal = () => {
+export function openModal() {
   let modal = $('<div>').addClass('c-modal').css('display', 'block');
 
   // モーダル中のHTMLを追加
@@ -55,5 +55,3 @@ const closeModal = () => {
 };
 
 // ========================================================================
-
-module.exports = openModal;
