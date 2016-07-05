@@ -17,7 +17,8 @@ export function openModal() {
 
   // モーダル中のHTMLを追加
   let modalContent = $(`
-    <div class="c-modal__content"><a class="c-modal__cancel">×</a>
+    <div class="c-modal__content">
+      <a class="c-modal__cancel">×</a>
       <h3 class="c-modal__title">タスクを作成する</h3>
       <div class="new-task-area">
         <input placeholder="タスク名を書いてください" class="new-task-input">
@@ -53,5 +54,31 @@ export function openModal() {
 const closeModal = () => {
   $('.c-modal').remove();
 };
+
+// ========================================================================
+
+
+/**
+ * 各リストの編集ボタンを展開するモーダル
+ */
+export function openEditModal(editEl, listItem) {
+  let opacityModal = $('<div>').addClass('opacity-modal').css('display', 'block');
+  let modal = $('<div>').addClass('c-edit-modal').css('display', 'block');
+  let modalContent = $(`
+    <a href="" class="c-edit-modal__text is-edit">編集</a>
+    <a href="" class="c-edit-modal__text is-remove">削除</a>
+  `);
+  modal.append(modalContent);
+  // モーダルを追加
+  editEl.before(modal);
+  $('.l-wrapper').before(opacityModal);
+
+  $(opacityModal).on('click', closeEditModal);
+}
+
+function closeEditModal() {
+  $('.c-edit-modal').remove();
+  $('.opacity-modal').remove();
+}
 
 // ========================================================================

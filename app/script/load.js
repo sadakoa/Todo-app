@@ -3,6 +3,7 @@
  */
 
 import $ from 'jquery';
+import * as modal from './modal'; // モーダル関数
 
 // ========================================================================
 
@@ -22,8 +23,11 @@ export function initialize() {
     for(let i=0; i < storageData.length; i++) {
       // リスト要素の生成
       let listItem = $(`
-        <li class="c-sticky p-task-listarea__item">${storageData[i].text}<a class="p-task-edit">
-        <img src="images/edit.png" width="20" class="p-task-edit__img"></a></li>
+        <li class="c-sticky p-task-listarea__item">${storageData[i].text}
+          <a class="p-task-edit">
+            <img src="images/edit.png" width="20" class="p-task-edit__img">
+          </a>
+        </li>
       `);
       // 追加
       cardArea.append(listItem);
@@ -32,8 +36,10 @@ export function initialize() {
     // リスト要素の編集ボタンにイベントを設定
     let EditTaskButton = $('.p-task-edit');
     // リスト要素にクリックイベントを設定
-    EditTaskButton.on('click', function(e) {
-      console.log('obj');
+    EditTaskButton.on('click', function(evt) {
+      let listItem = $(this).parent().text();
+      let editEl = $(this);
+      modal.openEditModal(editEl, listItem);
     });
   }
 }
