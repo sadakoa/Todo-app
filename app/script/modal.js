@@ -1,52 +1,9 @@
 /**
- * design - View
  * モーダルに関するファイル
  */
 
-import $ from 'jquery';
-import * as view from './view';
-
-// ========================================================================
-
-/**
- * モーダル展開関数 - タスクを作成するを押した時に実行される
- * modal - コンテンツをくくっているdiv
- * modalContent - 内包する中身
- * modalCancel - モーダルを閉じるボタン
- */
-export function openModal() {
-  let modal = $('<div>').addClass('c-modal').css('display', 'block');
-
-  // モーダル中のHTMLを追加
-  let modalContent = $(`
-    <div class="c-modal__content">
-      <a class="c-modal__cancel">×</a>
-      <h3 class="c-modal__title">タスクを作成する</h3>
-      <div class="new-task-area">
-        <input placeholder="タスク名を書いてください" class="new-task-input">
-        <select class="new-task-category">
-          <option value="backlog">Backlog</option>
-          <option value="doing">Doing</option>
-        </select>
-      </div>
-      <button class="c-button is-create new-task-saveButton">タスクを作成</button>
-    </div>
-    `);
-  // modalContentをmodalの中に追加
-  $(modal).append(modalContent);
-  // .l-wrapperの前に要素を生成
-  $('.l-wrapper').before(modal);
-
-  // モーダルの閉じるボタンを変数に格納
-  let modalCancel = $('.c-modal__cancel');
-  // 閉じるボタンを押したらモーダルを削除
-  modalCancel.on('click', closeModal);
-
-  // タスク作成ボタンを変数に格納
-  let saveTaskButton = $('.new-task-saveButton');
-  // 作成ボタンを押したら
-  saveTaskButton.on('click', view.addListItem);
-};
+import $ from 'jquery'; // jqueryモジュール
+import * as view from './view'; // viewを操作する関数
 
 // ========================================================================
 
@@ -59,16 +16,65 @@ const closeModal = () => {
 
 // ========================================================================
 
+/**
+ * モーダル展開関数 - タスクを作成するを押した時に実行される
+ * modal - コンテンツをくくっているdiv
+ * modalContent - 内包する中身
+ * modalCancel - モーダルを閉じるボタン
+ */
+export function openModal() {
+  const modal = $('<div>').addClass('c-modal').css('display', 'block');
+
+  // モーダル中のHTMLを追加
+  const modalContent = $(`
+    <div class="c-modal__content">
+      <a class="c-modal__cancel">×</a>
+      <h3 class="c-modal__title">タスクを作成する</h3>
+      <div class="new-task-area">
+        <input placeholder="タスク名を書いてください" class="new-task-input">
+        <select class="new-task-category">
+          <option value="backlog">Backlog</option>
+          <option value="doing">Doing</option>
+        </select>
+      </div>
+      <button class="c-button is-create new-task-saveButton">タスクを作成</button>
+    </div>
+  `);
+  // modalContentをmodalの中に追加
+  $(modal).append(modalContent);
+  // .l-wrapperの前に要素を生成
+  $('.l-wrapper').before(modal);
+
+  // モーダルの閉じるボタンを変数に格納
+  const modalCancel = $('.c-modal__cancel');
+  // 閉じるボタンを押したらモーダルを削除
+  modalCancel.on('click', closeModal);
+
+  // タスク作成ボタンを変数に格納
+  const saveTaskButton = $('.new-task-saveButton');
+  // 作成ボタンを押したら
+  saveTaskButton.on('click', view.addListItem);
+}
+
+// ========================================================================
+
+/**
+ * closeEditModal - リストのモーダルを削除する関数
+ */
+function closeEditModal() {
+  $('.c-edit-modal').remove();
+  $('.opacity-modal').remove();
+}
+
+// ========================================================================
 
 /**
  * 各リストの編集ボタンを展開するモーダル
  */
 export function openEditModal(editEl, listItem, listItemText) {
-  // テキストが初期化されているかも？
-  console.log(listItemText);
-  let opacityModal = $('<div>').addClass('opacity-modal').css('display', 'block');
-  let modal = $('<div>').addClass('c-edit-modal').css('display', 'block');
-  let modalContent = $(`
+  const opacityModal = $('<div>').addClass('opacity-modal').css('display', 'block');
+  const modal = $('<div>').addClass('c-edit-modal').css('display', 'block');
+  const modalContent = $(`
     <a href="" class="c-edit-modal__text is-edit">編集</a>
     <a href="" class="c-edit-modal__text is-remove">削除</a>
   `);
@@ -85,23 +91,13 @@ export function openEditModal(editEl, listItem, listItemText) {
   // ------------------------------------------------
 
   // 削除ボタンを変数に格納
-  let removeListItemButton = $('.is-remove');
-  removeListItemButton.on('click', function(e) {
+  const removeListItemButton = $('.is-remove');
+  removeListItemButton.on('click', function set(evt) {
     // a要素のHTMLイベントをキャンセル
-    e.preventDefault();
+    evt.preventDefault();
     // クリックされたリストを削除する関数
     view.removeListItem(listItem, listItemText);
   });
-}
-
-// ========================================================================
-
-/**
- * closeEditModal - リストのモーダルを削除する関数
- */
-function closeEditModal() {
-  $('.c-edit-modal').remove();
-  $('.opacity-modal').remove();
 }
 
 // ========================================================================

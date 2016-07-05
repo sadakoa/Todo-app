@@ -3,8 +3,6 @@
  * localStorageを操作するファイル
  */
 
-import $ from 'jquery';
-
 // ========================================================================
 
 
@@ -13,7 +11,6 @@ import $ from 'jquery';
  */
 export function sendStorage(textDataArray) {
   localStorage.setItem('data', JSON.stringify(textDataArray));
-  console.log(textDataArray);
 }
 
 // ========================================================================
@@ -32,6 +29,5 @@ export function removeAllStorage() {
  * クリックされたデータをストレージから削除する関数
  */
 export function removeStorage(textDataArray) {
-  console.log(textDataArray);
   localStorage.setItem('data', JSON.stringify(textDataArray));
 }

@@ -1,28 +1,15 @@
+/**
+ * design - Controller
+ * アプリの基盤ファイル
+ */
+
 // 利用モジュール ================================================
-import $ from 'jquery'; // jqueryモジュール
-import * as modal from './modal'; // モーダル関数
-import {initialize, setEvent} from './load'; // HTML読み込み後の実行関数
-import {removeAllListItem} from './view'; // viewを操作する関数
+import * as load from './load'; // HTML読み込み後の実行関数
 // ============================================================
 
 // 初期化及びHTML読み込み時に実行 =================================
 window.onload = () => {
-  initialize();
-  setEvent();
+  load.initialize(); // ローカルストレージにデータがある場合、リスト要素を生成する
+  load.setEvent(); // イベントリスナーを初期化する
 };
-// ============================================================
-
-// 要素の初期化及び変数に格納======================================
-
-// 新規でタスクを作成するボタン
-let newTaskButton = $('.new-task-button');
-newTaskButton.on('click', modal.openModal);
-
-// カテゴリからタスクを作成するボタン
-let addTaskButton = $('.p-task-addButton');
-addTaskButton.on('click', modal.openModal);
-
-// 全てのタスクを削除ボタン
-let removeAllButton = $('.p-task-wholeArea__text--anchor');
-removeAllButton.on('click', removeAllListItem);
 // ============================================================
