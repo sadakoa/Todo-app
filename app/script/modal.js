@@ -5,6 +5,7 @@
 
 import $ from 'jquery';
 import * as view from './view';
+import {setEditTaskButton} from './load' // モーダルを開く関数
 
 /**
  * モーダル展開関数 - タスクを作成するを押した時に実行される

@@ -52,3 +52,20 @@ export function initialize() {
 export function setEvent() {
   console.info('HELLO SQUIRREL');
 }
+
+// ========================================================================
+
+
+/**
+ * 各リストの編集モーダルを追加する関数
+ */
+export function setEditTaskButton() {
+  // リスト要素の編集ボタンにイベントを設定
+  let EditTaskButton = $('.p-task-edit');
+  // リスト要素にクリックイベントを設定
+  EditTaskButton.on('click', function(evt) {
+    let listItem = $(this).parent();
+    let editEl = $(this);
+    modal.openEditModal(editEl, listItem);
+  });
+}

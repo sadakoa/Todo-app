@@ -5,6 +5,7 @@
 
 import $ from 'jquery';
 import * as storage from './storage'; // localStorageを扱うモジュール
+import {setEditTaskButton} from './load' // モーダルを開く関数
 
 // ========================================================================
 // 要素を追加していく変数
@@ -42,6 +43,9 @@ storage.sendStorage(textDataArray);
 
 // モーダルを削除
 $('.c-modal').remove();
+
+// 編集モーダルを追加する
+setEditTaskButton();
 }
 
 // ========================================================================
