@@ -8,15 +8,16 @@ import handleErrors from '../../handleErrors.js';
 import browser from 'browser-sync';
 const conf = require('../config.js');
 
+// watch タスク用
 gulp.task('js', () => {
-browserify({
-entries: [conf.js.src]
-})
-.transform(babelify)
-.bundle()
-.on('error', handleErrors)
-.pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
-.pipe(source('app.js'))
-.pipe(gulp.dest(conf.js.dest))
-.pipe(browser.reload({stream:true}));
+  browserify({
+  entries: [conf.js.src]
+  })
+  .transform(babelify)
+  .bundle()
+  .on('error', handleErrors)
+  .pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
+  .pipe(source('app.js'))
+  .pipe(gulp.dest(conf.js.dest))
+  .pipe(browser.reload({stream:true}));
 });

@@ -4,7 +4,7 @@
   "description": "project tamplate",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "watchify ./app/script/app.js -t babelify -o 'exorcist ./dist/js/app.js.map > ./dist/js/app.js' -d -v"
   },
   "author": "sadakoa",
   "license": "MIT",
