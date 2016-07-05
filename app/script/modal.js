@@ -5,7 +5,8 @@
 
 import $ from 'jquery';
 import * as view from './view';
-import {setEditTaskButton} from './load' // モーダルを開く関数
+
+// ========================================================================
 
 /**
  * モーダル展開関数 - タスクを作成するを押した時に実行される
@@ -62,7 +63,7 @@ const closeModal = () => {
 /**
  * 各リストの編集ボタンを展開するモーダル
  */
-export function openEditModal(editEl, listItem) {
+export function openEditModal(editEl, listItem, listItemText) {
   let opacityModal = $('<div>').addClass('opacity-modal').css('display', 'block');
   let modal = $('<div>').addClass('c-edit-modal').css('display', 'block');
   let modalContent = $(`
@@ -71,7 +72,6 @@ export function openEditModal(editEl, listItem) {
   `);
   // 要素を追加
   modal.append(modalContent);
-
   // モーダルをリスト要素の中に追加
   editEl.before(modal);
   // 透明な領域をbodyの上に追加
@@ -83,15 +83,14 @@ export function openEditModal(editEl, listItem) {
   // 削除ボタンを変数に格納
   let removeListItemButton = $('.is-remove');
   removeListItemButton.on('click', function(e) {
-    // リスト要素を削除
-    listItem.remove();
-    $('.opacity-modal').remove();
-    return false;
+    // a要素のHTMLイベントをキャンセル
+    e.preventDefault();
+    // クリックされたリストを削除する関数
+    view.removeListItem(listItem, listItemText);
   });
 }
 
 // ========================================================================
-
 
 /**
  * closeEditModal - リストのモーダルを削除する関数

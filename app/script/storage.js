@@ -11,8 +11,8 @@ import $ from 'jquery';
 /**
  *  keyをdataにして配列をlocalStorageにpushする関数
  */
-export function sendStorage(textData) {
-  localStorage.setItem('data', JSON.stringify(textData));
+export function sendStorage(textDataArray) {
+  localStorage.setItem('data', JSON.stringify(textDataArray));
 }
 
 // ========================================================================
@@ -23,4 +23,14 @@ export function sendStorage(textData) {
  */
 export function removeAllStorage() {
   localStorage.clear();
+}
+
+// ========================================================================
+
+/**
+ * クリックされたデータをストレージから削除する関数
+ */
+export function removeStorage(textDataArray) {
+  console.log(textDataArray);
+  localStorage.setItem('data', JSON.stringify(textDataArray));
 }

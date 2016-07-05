@@ -11,9 +11,12 @@ import {setEditTaskButton} from './load' // モーダルを開く関数
 // 要素を追加していく変数
 let textDataArray = JSON.parse(localStorage.getItem('data'));
 
+// もしローカルストレージのデータが空なら初期化
 if(textDataArray === null) {
   textDataArray = [];
 }
+
+// ========================================================================
 
 /**
  * カードに作成したリストを追加する関数
@@ -44,7 +47,7 @@ storage.sendStorage(textDataArray);
 // モーダルを削除
 $('.c-modal').remove();
 
-// 編集モーダルを追加する
+// 編集モーダルを追加する関数
 setEditTaskButton();
 }
 
@@ -57,5 +60,28 @@ export function removeAllListItem() {
   $('.p-task-listArea').empty();
   storage.removeAllStorage();
 }
+
+// ========================================================================
+
+/**
+ * クリックされたリストを削除する関数
+ */
+export function removeListItem(listItem, listItemText) {
+  listItem.remove();
+  $('.opacity-modal').remove();
+  // 配列の中身の数だけ処理を繰り返す
+  for(let i = 0; i < textDataArray.length; i++) {
+
+    // もし配列のtextキーに当てはまる要素があったら
+    if(textDataArray[i].text == listItemText) {
+      // 配列から削除
+      textDataArray.splice(i, 1);
+      console.log(`配列から${listItemText}を削除`);
+      break;
+    }
+  }
+  storage.removeStorage(textDataArray);
+}
+
 
 // ========================================================================
