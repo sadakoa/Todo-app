@@ -38,7 +38,6 @@ export function initialize() {
  * setEvent - イベントリスナーの初期化をまとめた関数
  */
 export function setEvent() {
-  // console.info('HELLO SQUIRREL');
 }
 
 // ========================================================================

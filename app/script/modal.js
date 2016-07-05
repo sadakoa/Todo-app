@@ -64,6 +64,8 @@ const closeModal = () => {
  * 各リストの編集ボタンを展開するモーダル
  */
 export function openEditModal(editEl, listItem, listItemText) {
+  // テキストが初期化されているかも？
+  console.log(listItemText);
   let opacityModal = $('<div>').addClass('opacity-modal').css('display', 'block');
   let modal = $('<div>').addClass('c-edit-modal').css('display', 'block');
   let modalContent = $(`
@@ -79,6 +81,8 @@ export function openEditModal(editEl, listItem, listItemText) {
 
   // 指定領域以外クリックしたらモーダルを閉じる
   $(opacityModal).on('click', closeEditModal);
+
+  // ------------------------------------------------
 
   // 削除ボタンを変数に格納
   let removeListItemButton = $('.is-remove');

@@ -13,6 +13,7 @@ import $ from 'jquery';
  */
 export function sendStorage(textDataArray) {
   localStorage.setItem('data', JSON.stringify(textDataArray));
+  console.log(textDataArray);
 }
 
 // ========================================================================

@@ -5,7 +5,7 @@
 
 import $ from 'jquery';
 import * as storage from './storage'; // localStorageを扱うモジュール
-import {setEditTaskButton} from './load' // モーダルを開く関数
+import * as modal from './modal'; // モーダル関数
 
 // ========================================================================
 // 要素を追加していく変数
@@ -22,7 +22,6 @@ if(textDataArray === null) {
  * カードに作成したリストを追加する関数
  */
 export function addListItem() {
-
   // inputに記入された文字を変数に格納
 let inputValue = $('.new-task-input').val();
 // 選択されたoptionを変数に格納
@@ -31,9 +30,9 @@ let listItem = $(`
   <li class="c-sticky p-task-listarea__item">${inputValue}<a class="p-task-edit">
   <img src="images/edit.png" width="20" class="p-task-edit__img"></a></li>
   `);
-
 // タスクをカードに追加
 $('.p-backlog-card .p-task-listArea').append(listItem);
+
 
 // 配列にデータを追加
 textDataArray.push({
@@ -47,8 +46,15 @@ storage.sendStorage(textDataArray);
 // モーダルを削除
 $('.c-modal').remove();
 
-// 編集モーダルを追加する関数
-setEditTaskButton();
+let EditTaskButton = $(listItem).find('.p-task-edit');
+
+// イベント関数の初期化
+EditTaskButton.on('click', function(evt) {
+  let listItem = $(this).parent();
+  let listItemText = $(this).parent().text();
+  let editEl = $(this);
+  modal.openEditModal(editEl, listItem, listItemText);
+});
 }
 
 // ========================================================================
@@ -69,15 +75,20 @@ export function removeAllListItem() {
 export function removeListItem(listItem, listItemText) {
   listItem.remove();
   $('.opacity-modal').remove();
+
+  // 削除する要素のテキスト
+  let a = 'a';
   // 配列の中身の数だけ処理を繰り返す
   for(let i = 0; i < textDataArray.length; i++) {
 
     // もし配列のtextキーに当てはまる要素があったら
-    if(textDataArray[i].text == listItemText) {
+    if (textDataArray[i].text == $.trim(listItemText)) {
       // 配列から削除
-      textDataArray.splice(i, 1);
       console.log(`配列から${listItemText}を削除`);
+      textDataArray.splice(i, 1);
       break;
+    } else {
+      console.log('削除ができていない');
     }
   }
   storage.removeStorage(textDataArray);
