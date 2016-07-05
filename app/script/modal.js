@@ -68,14 +68,33 @@ export function openEditModal(editEl, listItem) {
     <a href="" class="c-edit-modal__text is-edit">編集</a>
     <a href="" class="c-edit-modal__text is-remove">削除</a>
   `);
+  // 要素を追加
   modal.append(modalContent);
-  // モーダルを追加
+
+  // モーダルをリスト要素の中に追加
   editEl.before(modal);
+  // 透明な領域をbodyの上に追加
   $('.l-wrapper').before(opacityModal);
 
+  // 指定領域以外クリックしたらモーダルを閉じる
   $(opacityModal).on('click', closeEditModal);
+
+  // 削除ボタンを変数に格納
+  let removeListItemButton = $('.is-remove');
+  removeListItemButton.on('click', function(e) {
+    // リスト要素を削除
+    listItem.remove();
+    $('.opacity-modal').remove();
+    return false;
+  });
 }
 
+// ========================================================================
+
+
+/**
+ * closeEditModal - リストのモーダルを削除する関数
+ */
 function closeEditModal() {
   $('.c-edit-modal').remove();
   $('.opacity-modal').remove();
