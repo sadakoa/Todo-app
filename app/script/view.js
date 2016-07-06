@@ -30,8 +30,11 @@ export function addListItem() {
     <li class="c-sticky p-task-listarea__item">${inputValue}<a class="p-task-edit">
     <img src="images/edit.png" width="20" class="p-task-edit__img"></a></li>
   `);
+
+  // 生成するリストエリアのIDを取得
+  const listArea = ('#' + selectValue);
   // タスクをカードに追加
-  $('.p-backlog-card .p-task-listArea').append(listItem);
+  $(listArea).append(listItem);
 
   // 配列にデータを追加
   textDataArray.push({
