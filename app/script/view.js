@@ -140,6 +140,42 @@ function cancelEdit(aListItem, aListItemText, aTaskEditEl) {
 // ========================================================================
 
 /**
+ * putArrayData - 編集されたリストを元に配列を更新する関数
+ *
+ * @param  {type} aListItem     各リスト要素
+ * @param  {type} aListItemText 古いリスト要素のテキスト
+ * @param  {type} newTextData   新しいリスト要素のテキスト
+ */
+function putArrayData(aListItem, aListItemText, newTextData) {
+  for (let i = 0; i < textDataArray.length; i++) {
+    // もし配列のtextキーに当てはまる要素があったら
+    if (textDataArray[i].text === $.trim(aListItemText)) {
+      // 当てはまった要素の位置
+      const iPos = i;
+
+      // 配列から削除
+      textDataArray.splice(iPos, 1);
+      // ストレージから要素を削除
+      storage.removeStorage(textDataArray);
+
+      // リストが所属するカードのカテゴリ
+      const selectValue = aListItem.parent().attr('id');
+      // 削除した位置に新規で配列にデータを追加
+      textDataArray.splice(iPos, 0, {
+        text: newTextData, category: selectValue,
+      });
+
+      // ストレージデータを更新
+      storage.sendStorage(textDataArray);
+      break;
+    }
+  }
+}
+
+
+// ========================================================================
+
+/**
  * editListItem - クリックされた要素のテキストを編集する関数
  * @param  {type} aListItem 各リスト要素
  * @param  {type} aListItemText 各リストのテキスト要素
@@ -171,31 +207,8 @@ export function editListItem(aListItem, aListItemText) {
   saveButton.on('click', () => {
     // 要素を書き換え、イベントを再設定する関数
     let newTextData = AgainSetEdit(aListItem, inputEl, taskEditEl);
-    // -------------------------------------
-    for (let i = 0; i < textDataArray.length; i++) {
-      // もし配列のtextキーに当てはまる要素があったら
-      if (textDataArray[i].text === $.trim(aListItemText)) {
-        // 当てはまった要素の位置
-        let iPos = i;
-
-        // 配列から削除
-        textDataArray.splice(iPos, 1);
-        // ストレージから要素を削除
-        storage.removeStorage(textDataArray);
-
-        // リストが所属するカードのカテゴリ
-        const selectValue = aListItem.parent().attr('id');
-        // 削除した位置に新規で配列にデータを追加
-        textDataArray.splice(iPos, 0, {
-          text: newTextData, category: selectValue,
-        });
-
-        // ストレージデータを更新
-        storage.sendStorage(textDataArray);
-        break;
-      }
-    }
-    // -------------------------------------
+    // 編集されたリストを元に配列を更新する関数
+    putArrayData(aListItem, aListItemText, newTextData);
   });
 
   // キャンセルボタン
