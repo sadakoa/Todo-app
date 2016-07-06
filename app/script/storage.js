@@ -17,10 +17,10 @@ export function sendStorage(textDataArray) {
 // ========================================================================
 
 /**
- * removeAllStorage - 全てのデータをストレージから削除する関数
+ * removeAllStorage - タスクデータをストレージから削除する関数
  */
 export function removeAllStorage() {
-  localStorage.clear();
+  localStorage.removeItem('data');
 }
 
 // ========================================================================
@@ -32,4 +32,22 @@ export function removeAllStorage() {
  */
 export function removeStorage(textDataArray) {
   localStorage.setItem('data', JSON.stringify(textDataArray));
+}
+
+// ========================================================================
+
+
+/**
+ * sendLogStorage - タスク名をストレージに送る関数
+ *
+ * @param  {type} logArray タスク名の配列
+ */
+export function sendLogStorage(logArray) {
+  localStorage.setItem('taskLog', JSON.stringify(logArray));
+}
+
+// ========================================================================
+
+export function removeLogStorage(logArray) {
+  localStorage.removeItem('taskLog');
 }

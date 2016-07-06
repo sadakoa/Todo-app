@@ -29,6 +29,7 @@ export function setEditTaskButton() {
 export function initialize() {
   // 配列にあるデータの取得 & 文字列からオブジェクトにパース
   const storageData = JSON.parse(localStorage.getItem('data'));
+  const logData = JSON.parse(localStorage.getItem('taskLog'));
   // リストを追加する場所
   const backlogArea = $('#backlog');
   const doingArea = $('#doing');
@@ -68,6 +69,14 @@ export function initialize() {
 
     // リスト要素の編集ボタンにイベントを設定
     setEditTaskButton();
+  }
+  if (logData !== null) {
+    for (let i = 0; i < logData.length; i++) {
+      const pEl = $(`
+        <p class="p-task-log">${logData[i].taskName}</p>
+      `);
+      $('.log-area').append(pEl);
+    }
   }
 }
 
