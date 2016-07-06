@@ -23,7 +23,6 @@ const closeModal = () => {
  * modalContent - 内包する中身
  * modalCancel - モーダルを閉じるボタン
  */
-
 export function openModal() {
   const modal = $('<div>').addClass('c-modal').css('display', 'block');
 
