@@ -163,6 +163,7 @@ function putArrayData(aListItem, aListItemText, newTextData) {
 
       // リストが所属するカードのカテゴリ
       const selectValue = aListItem.parent().attr('id');
+      console.log(selectValue); // 確認
       // 削除した位置に新規で配列にデータを追加
       textDataArray.splice(iPos, 0, {
         text: newTextData, category: selectValue,
@@ -174,7 +175,6 @@ function putArrayData(aListItem, aListItemText, newTextData) {
     }
   }
 }
-
 
 // ========================================================================
 

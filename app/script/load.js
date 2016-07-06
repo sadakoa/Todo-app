@@ -30,17 +30,40 @@ export function initialize() {
   // 配列にあるデータの取得 & 文字列からオブジェクトにパース
   const storageData = JSON.parse(localStorage.getItem('data'));
   // リストを追加する場所
-  const cardArea = $('.p-backlog-card .p-task-listArea');
+  const backlogArea = $('#backlog');
+  const doingArea = $('#doing');
+  const doneArea = $('#done');
+
   // もしストレージにデータがあればリスト要素の数だけ繰り返して表示
   if (storageData !== null) {
     for (let i = 0; i < storageData.length; i++) {
-      // リスト要素の生成
-      const listItem = $(`
-        <li class="c-sticky p-task-listarea__item">${storageData[i].text}<a class="p-task-edit">
-        <img src="images/edit.png" width="20" class="p-task-edit__img"></a></li>
-      `);
-      // リスト要素を領域に追加
-      cardArea.append(listItem);
+
+      // もしカテゴリ名がbacklogならbacklogエリアに追加
+      if(storageData[i].category === 'backlog') {
+        const listItem = $(`
+          <li class="c-sticky p-task-listarea__item">${storageData[i].text}<a class="p-task-edit">
+          <img src="images/edit.png" width="20" class="p-task-edit__img"></a></li>
+        `);
+        backlogArea.append(listItem);
+      }
+
+      // もしカテゴリ名がdoingならdoingAreaに追加
+      else if (storageData[i].category === 'doing') {
+        const listItem = $(`
+          <li class="c-sticky p-task-listarea__item">${storageData[i].text}<a class="p-task-edit">
+          <img src="images/edit.png" width="20" class="p-task-edit__img"></a></li>
+        `);
+        doingArea.append(listItem);
+      }
+
+      // もしカテゴリ名がdoneならdoneAreaに追加
+      else if (storageData[i].category === 'done') {
+        const listItem = $(`
+          <li class="c-sticky p-task-listarea__item">${storageData[i].text}<a class="p-task-edit">
+          <img src="images/edit.png" width="20" class="p-task-edit__img"></a></li>
+        `);
+        doneArea.append(listItem);
+      }
     }
 
     // リスト要素の編集ボタンにイベントを設定
