@@ -71,6 +71,8 @@ export function initialize() {
     // リスト要素の編集ボタンにイベントを設定
     setEditTaskButton();
   }
+
+  // もしログデータがあるならサイドバーに表示
   if (logData !== null) {
     for (let i = 0; i < logData.length; i++) {
       const pEl = $(`

@@ -26,6 +26,11 @@ export function getTaskLog(aTaskName) {
   model.sendLogStorage(logArray);
 }
 
+
+/**
+ * renderTaskLog - 履歴を追加する関数
+ * @param  {type} aTaskName 各タスクの名前
+ */
 export function renderTaskLog(aTaskName) {
   const pEl = $(`
     <p class="p-task-log">${aTaskName}</p>
@@ -33,6 +38,10 @@ export function renderTaskLog(aTaskName) {
   $('.log-area').append(pEl);
 }
 
+
+/**
+ * 削除ボタンをクリックされたらストレージと履歴を削除
+ */
 $('.p-task-logArea__remove').on('click', function(evt) {
   evt.preventDefault();
   model.removeLogStorage(logArray);

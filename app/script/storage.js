@@ -48,6 +48,12 @@ export function sendLogStorage(logArray) {
 
 // ========================================================================
 
+
+/**
+ * removeLogStorage - タスク名をストレージから削除する関数
+ *
+ * @param  {type} logArray タスク名の配列
+ */
 export function removeLogStorage(logArray) {
   localStorage.removeItem('taskLog');
 }

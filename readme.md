@@ -1,19 +1,8 @@
-# es6-boilerplate
-![image](http://sadakoa.minibird.jp/img/boi.png)
+# SQUIRREL
 
 ## Overview
 
-gulp template.
-
-## Description
-
-- gulp
-- jade
-- stylus(sanitize & FLOCSS)
-- ES2015
-- browserify(babel)
-- image-min
-- browser reload
+simple todo application.
 
 ## Requirement
 
@@ -30,6 +19,3 @@ gulp template.
   % gulp build // compile
 
   % gulp // watch and compile
-
-## Author
-[@sadako_A_](https://twitter.com/sadako_A_)
