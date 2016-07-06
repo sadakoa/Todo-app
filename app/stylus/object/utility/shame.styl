@@ -35,7 +35,7 @@
     margin-bottom: 10px
     border-bottom: 1px solid bluegray
   .log-area
-    min-height: 500px
+    height: 400px
     overflow-y: scroll
     .p-task-log
       font-size 12px
@@ -59,9 +59,13 @@
 .p-task-listArea
   display flex
   flex-wrap: wrap
+  background red
+  min-height 230px
 
 .c-sticky
+  height: 69px
   cursor pointer
+  background #fff
   box-shadow: 0 2px 0px #BFBFBF
   position relative
   font-size 18px
@@ -70,6 +74,8 @@
   width: 30%
   padding: 20px 50px 20px 20px
   margin: 0 20px 20px 0
+  position relative
+  z-index 1
 
 .p-task-edit
   position absolute

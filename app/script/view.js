@@ -7,10 +7,11 @@ import $ from 'jquery'; // jqueryモジュール
 import * as storage from './storage'; // modelを操作する関数
 import * as modal from './modal'; // モーダル関数
 import * as log from './log' // タスク履歴を保持する関数
+import * as drag from './drag'; // ドラッグ操作する関数
 
 // ========================================================================
-// リスト要素を追加していく変数
-let textDataArray = JSON.parse(localStorage.getItem('data'));
+// リスト要素を追加していく変数 (本番環境でletだと要素が定義されてないERRORが出るのでvarに変更)
+var textDataArray = JSON.parse(localStorage.getItem('data'));
 
 // もしローカルストレージのデータが空なら初期化
 if (textDataArray === null) {
@@ -62,6 +63,9 @@ export function addListItem() {
 
   // サイドバーにタスク名前を生成する関数
   log.renderTaskLog(inputValue);
+
+  // ドラッグ&ドロップイベントの追加
+  drag.dragEvent();
 }
 
 // ========================================================================

@@ -5,6 +5,7 @@
 import $ from 'jquery'; // jqueryモジュール
 import * as modal from './modal'; // モーダル関数
 import * as view from './view'; // viewを操作する関数
+import * as drag from './drag'; // ドラッグ操作する関数
 
 // ========================================================================
 
@@ -92,6 +93,7 @@ export function setEvent() {
   $('.p-task-addButton').on('click', modal.openModal);
   // 全てのタスクを削除ボタン
   $('.p-task-wholeArea__text--anchor').on('click', view.removeAllListItem);
+  drag.dragEvent();
 }
 
 // ========================================================================
