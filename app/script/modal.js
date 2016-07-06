@@ -22,6 +22,7 @@ const closeModal = () => {
  * modalContent - 内包する中身
  * modalCancel - モーダルを閉じるボタン
  */
+
 export function openModal() {
   const modal = $('<div>').addClass('c-modal').css('display', 'block');
 
@@ -61,7 +62,7 @@ export function openModal() {
 /**
  * closeEditModal - リストのモーダルを削除する関数
  */
-function closeEditModal() {
+export function closeEditModal() {
   $('.c-edit-modal').remove();
   $('.opacity-modal').remove();
 }
@@ -69,7 +70,11 @@ function closeEditModal() {
 // ========================================================================
 
 /**
- * 各リストの編集ボタンを展開するモーダル
+ * openEditModal - 各リストの編集ボタンを展開するモーダル
+ *
+ * @param  {type} editEl       各リスト毎の編集ボタン
+ * @param  {type} listItem     各リスト要素
+ * @param  {type} listItemText 各リストのテキスト要素
  */
 export function openEditModal(editEl, listItem, listItemText) {
   const opacityModal = $('<div>').addClass('opacity-modal').css('display', 'block');
@@ -89,7 +94,6 @@ export function openEditModal(editEl, listItem, listItemText) {
   $(opacityModal).on('click', closeEditModal);
 
   // ------------------------------------------------
-
   // 削除ボタンを変数に格納
   const removeListItemButton = $('.is-remove');
   removeListItemButton.on('click', function set(evt) {
@@ -97,6 +101,16 @@ export function openEditModal(editEl, listItem, listItemText) {
     evt.preventDefault();
     // クリックされたリストを削除する関数
     view.removeListItem(listItem, listItemText);
+  });
+
+  // ------------------------------------------------
+  // 編集ボタンを変数に格納
+  const editListItemButton = $('.is-edit');
+  editListItemButton.on('click', function set(evt) {
+    // a要素のHTMLイベントをキャンセル
+    evt.preventDefault();
+    // クリックされた要素のテキストを編集する関数
+    view.editListItem(listItem, listItemText);
   });
 }
 

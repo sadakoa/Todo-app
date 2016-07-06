@@ -66,7 +66,10 @@ export function removeAllListItem() {
 // ========================================================================
 
 /**
- * クリックされたリストを削除する関数
+ * removeListItem - クリックされたリストを削除する関数
+ *
+ * @param  {type} aListItem     各リスト要素
+ * @param  {type} aListItemText 各リストのテキスト要素
  */
 export function removeListItem(aListItem, aListItemText) {
   aListItem.remove();
@@ -83,6 +86,66 @@ export function removeListItem(aListItem, aListItemText) {
   }
   // ストレージから要素を削除
   storage.removeStorage(textDataArray);
+}
+
+// ========================================================================
+/**
+ * AgainSetEdit - 保存後に要素を書き換え、イベントを再設定する関数
+ *
+ * @param  {type} aListItem   各リスト要素
+ * @param  {type} aSaveButton 保存ボタン
+ * @param  {type} aInputEl    インプット要素
+ * @param  {type} aTaskEditEl 各リストの編集要素
+ */
+function AgainSetEdit(aListItem, aSaveButton, aInputEl, aTaskEditEl) {
+  // 保存ボタンがクリックされたら要素の中身を変更、ストレージを修正する
+  aSaveButton.on('click', function (evt) {
+    // インプットに入力された値を格納
+    const newTextData = aInputEl.val();
+    // リストの中身を空にして要素を再生成する
+    aListItem.empty().text(newTextData).append(aTaskEditEl);
+
+    // 各リストの編集ボタンを変数に格納
+    const EditTaskButton = $(aListItem).find('.p-task-edit');
+    // イベント関数の初期化
+    EditTaskButton.on('click', function (evt) {
+      const [editEl, listItemText] = [$(this), $(this).parent().text()];
+      modal.openEditModal(editEl, aListItem, listItemText);
+    });
+  });
+}
+
+// ========================================================================
+
+/**
+ * editListItem - クリックされた要素のテキストを編集する関数
+ * @param  {type} aListItem 各リスト要素
+ * @param  {type} aListItemText 各リストのテキスト要素
+ */
+export function editListItem(aListItem, aListItemText) {
+  modal.closeEditModal();
+  // テキスト要素を変数に格納
+  const textData = aListItemText;
+  // 編集欄と保存ボタン要素
+  const inputEl = $(`
+    <input type="text" class="editText">
+    <button class="c-edit-button is-create saveButton">保存</button>
+  `);
+  // インプットのvalueにテキスト要素を追加
+  inputEl.val(textData);
+  // リスト要素の中身を削除 編集内容を追加
+  aListItem.empty().append(inputEl);
+  // 保存ボタン
+  const saveButton = $('.saveButton');
+
+  // リストの編集ボタン
+  const taskEditEl = $(`
+    <a class="p-task-edit">
+      <img src="images/edit.png" width="20" class="p-task-edit__img">
+    </a>
+  `);
+
+  AgainSetEdit(aListItem, saveButton, inputEl, taskEditEl);
 }
 
 // ========================================================================
