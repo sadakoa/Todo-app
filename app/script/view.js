@@ -113,12 +113,13 @@ function AgainSetEdit(aListItem, aInputEl, aTaskEditEl) {
     const [editEl, listItemText] = [$(this), $(this).parent().text()];
     modal.openEditModal(editEl, aListItem, listItemText);
   });
+  return newTextData;
 }
 // ========================================================================
 
 
 /**
- * cancelEdit - リストの編集をキャンセル関数
+ * cancelEdit - リストの編集をキャンセルする関数
  *
  * @param  {type} aListItem     各リスト要素
  * @param  {type} aListItemText 各リストのテキスト要素
@@ -169,7 +170,32 @@ export function editListItem(aListItem, aListItemText) {
   const saveButton = $('.saveButton');
   saveButton.on('click', () => {
     // 要素を書き換え、イベントを再設定する関数
-    AgainSetEdit(aListItem, inputEl, taskEditEl);
+    let newTextData = AgainSetEdit(aListItem, inputEl, taskEditEl);
+    // -------------------------------------
+    for (let i = 0; i < textDataArray.length; i++) {
+      // もし配列のtextキーに当てはまる要素があったら
+      if (textDataArray[i].text === $.trim(aListItemText)) {
+        // 当てはまった要素の位置
+        let iPos = i;
+
+        // 配列から削除
+        textDataArray.splice(iPos, 1);
+        // ストレージから要素を削除
+        storage.removeStorage(textDataArray);
+
+        // リストが所属するカードのカテゴリ
+        const selectValue = aListItem.parent().attr('id');
+        // 削除した位置に新規で配列にデータを追加
+        textDataArray.splice(iPos, 0, {
+          text: newTextData, category: selectValue,
+        });
+
+        // ストレージデータを更新
+        storage.sendStorage(textDataArray);
+        break;
+      }
+    }
+    // -------------------------------------
   });
 
   // キャンセルボタン
@@ -178,7 +204,6 @@ export function editListItem(aListItem, aListItemText) {
     // 要素の編集をキャンセルする関数
     cancelEdit(aListItem, aListItemText, taskEditEl);
   });
-  console.log(textDataArray);
 }
 
 // ========================================================================
