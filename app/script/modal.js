@@ -8,7 +8,6 @@ import * as view from './view'; // DOM要素に関係する関数
 
 // ========================================================================
 
-
 /**
  * closeModal - モーダルを閉じる関数
  */
@@ -19,15 +18,10 @@ const closeModal = () => {
 // ========================================================================
 
 /**
- * openModal - タスクを作成するを押した時に実行される
- * modal - コンテンツをくくっているdiv
- * modalContent - 内包する中身
- * modalCancel - モーダルを閉じるボタン
+ * renderModal - モーダルを生成する関数
  */
-export function openModal() {
+const renderModal = () => {
   const modal = $('<div>').addClass('c-modal').css('display', 'block');
-
-  // モーダル中のHTMLを追加
   const modalContent = $(`
     <div class="c-modal__content">
       <a class="c-modal__cancel">×</a>
@@ -42,43 +36,44 @@ export function openModal() {
       <button class="c-button is-create new-task-saveButton">タスクを作成</button>
     </div>
   `);
-  // modalContentをmodalの中に追加
   $(modal).append(modalContent);
-  // .l-wrapperの前に要素を生成
   $('.l-wrapper').before(modal);
+};
 
-  // モーダルの閉じるボタンを変数に格納
+// ========================================================================
+
+/**
+ * openModal - モーダルを開く関数
+ */
+export const openModal = () => {
+  renderModal();
   const modalCancel = $('.c-modal__cancel');
   // 閉じるボタンを押したらモーダルを削除
   modalCancel.on('click', closeModal);
 
   // タスク作成ボタンを変数に格納
   const saveTaskButton = $('.new-task-saveButton');
-  // 作成ボタンを押したら
+  // 作成ボタンを押したら要素を指定領域へ生成
   saveTaskButton.on('click', view.addListItem);
-}
+};
 
 // ========================================================================
 
 /**
- * closeEditModal - リストのモーダルを削除する関数
+ * closeEditModal - 編集モーダルを削除する関数
  */
-export function closeEditModal() {
+export const closeEditModal = () => {
   $('.c-edit-modal').remove();
   $('.opacity-modal').remove();
-  // $('.c-sticky').addClass('list-position');
-}
+};
 
 // ========================================================================
 
+
 /**
- * openEditModal - 各リストの編集ボタンを展開するモーダル
- *
- * @param  {type} editEl       各リスト毎の編集ボタン
- * @param  {type} listItem     各リスト要素
- * @param  {type} listItemText 各リストのテキスト要素
+ * renderEditModal - 編集モーダルを生成する関数
  */
-export function openEditModal(editEl, listItem, listItemText) {
+const renderEditModal = (editEl) => {
   const posY = editEl.offset().top;
   const posX = editEl.offset().left;
   const opacityModal = $('<div>').addClass('opacity-modal').css('display', 'block');
@@ -93,30 +88,39 @@ export function openEditModal(editEl, listItem, listItemText) {
   $('body').before(modal);
   // 透明な領域をbodyの上に追加
   $('.l-wrapper').before(opacityModal);
-
   // 指定領域以外クリックしたらモーダルを閉じる
   $(opacityModal).on('click', closeEditModal);
+};
 
-  // ------------------------------------------------
+// ========================================================================
+
+/**
+ * openEditModal - 編集モーダルを開く関数
+ *
+ * @param  {type} editEl       各リスト毎の編集ボタン
+ * @param  {type} listItem     各リスト要素
+ * @param  {type} listItemText 各リストのテキスト要素
+ */
+export const openEditModal = (editEl, listItem, listItemText) => {
+  // モーダル要素を生成
+  renderEditModal(editEl);
   // 削除ボタンを変数に格納
   const removeListItemButton = $('.is-remove');
-  removeListItemButton.on('click', function set(evt) {
+  removeListItemButton.on('click', (evt) => {
     // a要素のHTMLイベントをキャンセル
     evt.preventDefault();
     // クリックされたリストを削除する関数
     view.removeListItem(listItem, listItemText);
   });
-
-  // ------------------------------------------------
   // 編集ボタンを変数に格納
   const editListItemButton = $('.is-edit');
-  editListItemButton.on('click', function set(evt) {
+  editListItemButton.on('click', (evt) => {
     // a要素のHTMLイベントをキャンセル
     evt.preventDefault();
     // クリックされた要素のテキストを編集する関数
     view.editListItem(listItem, listItemText);
   });
   $('.c-sticky').removeClass('list-position');
-}
+};
 
 // ========================================================================
