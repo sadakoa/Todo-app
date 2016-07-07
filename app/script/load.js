@@ -12,7 +12,7 @@ import * as drag from './drag';   // ドラッグ操作に関係する関数
 /**
  * initialize - ローカルストレージにデータがある場合、指定領域に要素を生成する関数
  */
-export function initialize() {
+export const initialize = () => {
   // 配列にあるデータの取得 & 文字列からオブジェクトにパース
   const storageData = JSON.parse(localStorage.getItem('data'));
   const logData = JSON.parse(localStorage.getItem('taskLog'));
@@ -42,7 +42,8 @@ export function initialize() {
       $('.log-area').append(pEl);
     }
   }
-}
+};
+
 
 // ========================================================================
 
@@ -66,7 +67,7 @@ export function setEditTaskButton() {
 /**
  * setEvent - イベントリスナーの初期化をまとめた関数
  */
-export function setEvent() {
+export const setEvent = () => {
   // 新規でタスクを作成するボタン
   $('.new-task-button').on('click', modal.openModal);
   // カテゴリからタスクを作成するボタン
@@ -77,6 +78,6 @@ export function setEvent() {
   setEditTaskButton();
   // li要素にドラッグイベントを設定
   drag.dragEvent();
-}
+};
 
 // ========================================================================

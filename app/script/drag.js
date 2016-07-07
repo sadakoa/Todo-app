@@ -15,7 +15,7 @@ let listAreaId = null; // li要素をドロップする要素
 /**
  * dragEvent - li要素にドラッグイベントを設定する関数
  */
-export function dragEvent() {
+export const dragEvent = () => {
   // console.log(listAreaId);
   $('.c-sticky').draggable({
     snap: '.p-task-listArea', // スナップさせる領域
@@ -44,7 +44,7 @@ export function dragEvent() {
       }
     },
   });
-}
+};
 
 // ============================================================
 

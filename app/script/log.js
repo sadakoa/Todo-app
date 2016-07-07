@@ -20,10 +20,10 @@ if (logArray === null) {
  * getTaskLog - タスク履歴を保持する関数
  * @param  {string} aTaskName li要素のテキスト
  */
-export function getTaskLog(aTaskName) {
+export const getTaskLog = (aTaskName) => {
   logArray.push({ taskName: aTaskName });
   storage.sendLogStorage(logArray);
-}
+};
 
 // =============================================================
 
@@ -31,17 +31,17 @@ export function getTaskLog(aTaskName) {
  * renderTaskLog - 履歴を追加する関数
  * @param  {string} aTaskName li要素のテキスト
  */
-export function renderTaskLog(aTaskName) {
+export const renderTaskLog = (aTaskName) => {
   const pEl = $(`<p class="p-task-log">${aTaskName}</p>`);
   $('.log-area').append(pEl);
-}
+};
 
 // =============================================================
 
 /**
  * 削除ボタンがクリックされたらローカルストレージと要素を削除
  */
-$('.p-task-logArea__remove').on('click', function(evt) {
+$('.p-task-logArea__remove').on('click', (evt) => {
   evt.preventDefault();
   storage.removeLogStorage(logArray);
   $('.log-area').empty();
