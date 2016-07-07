@@ -16,6 +16,7 @@ let listAreaId = null; // li要素をドロップする要素
  * dragEvent - li要素にドラッグイベントを設定する関数
  */
 export function dragEvent() {
+  // console.log(listAreaId);
   $('.c-sticky').draggable({
     snap: '.p-task-listArea', // スナップさせる領域
     snapMode: 'inner',        // スナップの判定
@@ -33,8 +34,11 @@ export function dragEvent() {
         if (textDataArray[i].text === listItemText) {
           // マッチした要素の配列位置
           const iPos = i;
-          // 要素のkey(category:)を上書きする
-          textDataArray[iPos].category = listAreaId;
+          // ちゃんと指定領域にスナップされたらlistAreaIdを上書きする
+          if (listAreaId !== null) {
+            // 要素のkey(category:)を上書きする
+            textDataArray[iPos].category = listAreaId;
+          }
           // ストレージを更新
           storage.sendStorage(textDataArray);
         }
