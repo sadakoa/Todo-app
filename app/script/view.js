@@ -72,8 +72,8 @@ export const removeAllListItem = () => {
 /**
  * renderlistItem - li要素を生成する関数
  *
- * @param  {type} storageData 配列データ
- * @param  {type} i           配列のlength用カウンタ
+ * @param  {array} storageData 配列データ
+ * @param  {number} i           配列のlength用カウンタ
  */
 export const renderlistItem = (storageData, i) => {
   const listItem = $(`
@@ -88,8 +88,8 @@ export const renderlistItem = (storageData, i) => {
 /**
  * removeListItem - クリックされたリストを削除する関数
  *
- * @param  {type} aListItem     各リスト要素
- * @param  {type} aListItemText 各リストのテキスト要素
+ * @param  {string} aListItem     各リスト要素
+ * @param  {string} aListItemText 各リストのテキスト要素
  */
 export const removeListItem = (aListItem, aListItemText) => {
   aListItem.remove();
@@ -113,9 +113,9 @@ export const removeListItem = (aListItem, aListItemText) => {
 /**
  * AgainSetEdit - 保存後に要素を書き換え、イベントを再設定する関数
  *
- * @param  {type} aListItem   各リスト要素
- * @param  {type} aInputEl    インプット要素
- * @param  {type} aTaskEditEl 各リストの編集要素
+ * @param  {string} aListItem   各リスト要素
+ * @param  {string} aInputEl    インプット要素
+ * @param  {string} aTaskEditEl 各リストの編集要素
  */
 const AgainSetEdit = (aListItem, aInputEl, aTaskEditEl) => {
   // 保存ボタンがクリックされたら要素の中身を変更、ストレージを修正する
@@ -139,9 +139,9 @@ const AgainSetEdit = (aListItem, aInputEl, aTaskEditEl) => {
 /**
  * cancelEdit - リストの編集をキャンセルする関数
  *
- * @param  {type} aListItem     各リスト要素
- * @param  {type} aListItemText 各リストのテキスト要素
- * @param  {type} aTaskEditEl   各リストの編集要素
+ * @param  {string} aListItem     各リスト要素
+ * @param  {string} aListItemText 各リストのテキスト要素
+ * @param  {string} aTaskEditEl   各リストの編集要素
  */
 const cancelEdit = (aListItem, aListItemText, aTaskEditEl) => {
   // リストの中身を空にして要素を再生成する
@@ -160,9 +160,9 @@ const cancelEdit = (aListItem, aListItemText, aTaskEditEl) => {
 /**
  * putArrayData - 編集されたリストを元に配列を更新する関数
  *
- * @param  {type} aListItem     各リスト要素
- * @param  {type} aListItemText 古いリスト要素のテキスト
- * @param  {type} newTextData   新しいリスト要素のテキスト
+ * @param  {string} aListItem     各リスト要素
+ * @param  {string} aListItemText 古いリスト要素のテキスト
+ * @param  {string} newTextData   新しいリスト要素のテキスト
  */
 const putArrayData = (aListItem, aListItemText, newTextData) => {
   for (let i = 0; i < textDataArray.length; i++) {
@@ -194,8 +194,8 @@ const putArrayData = (aListItem, aListItemText, newTextData) => {
 
 /**
  * editListItem - クリックされた要素のテキストを編集する関数
- * @param  {type} aListItem 各リスト要素
- * @param  {type} aListItemText 各リストのテキスト要素
+ * @param  {string} aListItem 各リスト要素
+ * @param  {string} aListItemText 各リストのテキスト要素
  */
 export const editListItem = (aListItem, aListItemText) => {
   modal.closeEditModal();

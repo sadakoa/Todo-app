@@ -97,9 +97,9 @@ const renderEditModal = (editEl) => {
 /**
  * openEditModal - 編集モーダルを開く関数
  *
- * @param  {type} editEl       各リスト毎の編集ボタン
- * @param  {type} listItem     各リスト要素
- * @param  {type} listItemText 各リストのテキスト要素
+ * @param  {string} editEl       各リスト毎の編集ボタン
+ * @param  {string} listItem     各リスト要素
+ * @param  {string} listItemText 各リストのテキスト要素
  */
 export const openEditModal = (editEl, listItem, listItemText) => {
   // モーダル要素を生成
