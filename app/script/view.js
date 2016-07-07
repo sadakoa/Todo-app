@@ -205,10 +205,10 @@ export const editListItem = (aListItem, aListItemText) => {
   const inputEl = $(`
     <input type="text" class="editText">
     <button class="c-edit-button is-create saveButton">保存</button>
-  <button class="c-edit-button is-cancel cancelButton">終了</button>
+    <button class="c-edit-button is-cancel cancelButton">終了</button>
   `);
   // インプットのvalueにテキスト要素を追加
-  inputEl.val(textData);
+  inputEl.val($.trim(textData));
   // リスト要素の中身を削除 編集内容を追加
   aListItem.empty().append(inputEl);
 
