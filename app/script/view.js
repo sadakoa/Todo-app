@@ -69,7 +69,6 @@ export function addListItem() {
   drag.dragEvent();
 }
 
-
 // ========================================================================
 
 
@@ -79,6 +78,23 @@ export function addListItem() {
 export function removeAllListItem() {
   $('.p-task-listArea').empty();
   storage.removeAllStorage();
+}
+
+// =========================================================================
+
+
+/**
+ * renderlistItem - li要素を生成する関数
+ *
+ * @param  {type} storageData 配列データ
+ * @param  {type} i           配列のlength用カウンタ
+ */
+export function renderlistItem(storageData, i) {
+  const listItem = $(`
+    <li class="c-sticky p-task-listarea__item">${storageData[i].text}<a class="p-task-edit">
+    <img src="images/edit.png" width="20" class="p-task-edit__img"></a></li>
+  `);
+  return listItem;
 }
 
 // ========================================================================
