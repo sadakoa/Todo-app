@@ -34,9 +34,8 @@ export function dragEvent() {
         if (textDataArray[i].text === listItemText) {
           // マッチした要素の配列位置
           const iPos = i;
-          // ちゃんと指定領域にスナップされたらlistAreaIdを上書きする
+          // もし指定領域にスナップされたらlistAreaIdを上書きする
           if (listAreaId !== null) {
-            // 要素のkey(category:)を上書きする
             textDataArray[iPos].category = listAreaId;
           }
           // ストレージを更新
@@ -44,7 +43,6 @@ export function dragEvent() {
         }
       }
     },
-    // stop: function終了
   });
 }
 
