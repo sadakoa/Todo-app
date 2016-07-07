@@ -65,6 +65,7 @@ export function openModal() {
 export function closeEditModal() {
   $('.c-edit-modal').remove();
   $('.opacity-modal').remove();
+  // $('.c-sticky').addClass('list-position');
 }
 
 // ========================================================================
@@ -77,8 +78,10 @@ export function closeEditModal() {
  * @param  {type} listItemText 各リストのテキスト要素
  */
 export function openEditModal(editEl, listItem, listItemText) {
+  const posY = editEl.offset().top;
+  const posX = editEl.offset().left;
   const opacityModal = $('<div>').addClass('opacity-modal').css('display', 'block');
-  const modal = $('<div>').addClass('c-edit-modal').css('display', 'block');
+  const modal = $('<div>').addClass('c-edit-modal').css({ top: posY, left: posX });
   const modalContent = $(`
     <a href="" class="c-edit-modal__text is-edit">編集</a>
     <a href="" class="c-edit-modal__text is-remove">削除</a>
@@ -86,7 +89,7 @@ export function openEditModal(editEl, listItem, listItemText) {
   // 要素を追加
   modal.append(modalContent);
   // モーダルをリスト要素の中に追加
-  editEl.before(modal);
+  $('body').before(modal);
   // 透明な領域をbodyの上に追加
   $('.l-wrapper').before(opacityModal);
 
@@ -112,6 +115,7 @@ export function openEditModal(editEl, listItem, listItemText) {
     // クリックされた要素のテキストを編集する関数
     view.editListItem(listItem, listItemText);
   });
+  $('.c-sticky').removeClass('list-position');
 }
 
 // ========================================================================
