@@ -90,6 +90,7 @@ export function removeAllListItem() {
  */
 export function removeListItem(aListItem, aListItemText) {
   aListItem.remove();
+  $('.c-edit-modal').remove();
   $('.opacity-modal').remove();
 
   // 配列の中身の数だけ処理を繰り返す
