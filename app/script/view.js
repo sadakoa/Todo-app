@@ -42,6 +42,7 @@ export function addListItem() {
   textDataArray.push({
     text: inputValue, category: selectValue,
   });
+  console.log(textDataArray);
 
   // 配列のデータをストレージに送る
   storage.sendStorage(textDataArray);
@@ -179,6 +180,7 @@ function putArrayData(aListItem, aListItemText, newTextData) {
       textDataArray.splice(iPos, 0, {
         text: newTextData, category: selectValue,
       });
+      console.log(textDataArray);
 
       // ストレージデータを更新
       storage.sendStorage(textDataArray);

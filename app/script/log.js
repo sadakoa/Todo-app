@@ -3,7 +3,7 @@
  */
 
 import $ from 'jquery'; // jqueryモジュール
-import * as model from './storage'; // modelを操作する関数
+import * as storage from './storage'; // modelを操作する関数
 
 // =======================================================
 
@@ -23,7 +23,7 @@ export function getTaskLog(aTaskName) {
   logArray.push({
     taskName: aTaskName,
   });
-  model.sendLogStorage(logArray);
+  storage.sendLogStorage(logArray);
 }
 
 
@@ -44,6 +44,6 @@ export function renderTaskLog(aTaskName) {
  */
 $('.p-task-logArea__remove').on('click', function(evt) {
   evt.preventDefault();
-  model.removeLogStorage(logArray);
+  storage.removeLogStorage(logArray);
   $('.log-area').empty();
 });

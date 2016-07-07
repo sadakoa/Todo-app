@@ -4,9 +4,10 @@
 
 import $ from 'jquery'; // jqueryモジュール
 require('jquery-ui'); // jquery UIを読み込み
+import * as storage from './storage'; // modelを操作する関数
+
 
 var listAreaId = null; // 要素をドロップする先の変数
-const textDataArray = JSON.parse(localStorage.getItem('data')); // ストレージのデータ
 const moveDecision = true; // 動かす判定
 
 // リスト要素にドラッグイベントを設定する関数
@@ -18,11 +19,19 @@ export function dragEvent() {
     revert: 'invalid', // 指定領域以外はスナップできない
     // ドラッグ操作を終了した時に呼び出される----------------
     stop: function(evt, ui) {
-      const listItemText = ($(this).text());
-      console.log(listItemText);
+      const textDataArray = JSON.parse(localStorage.getItem('data')); // 動かした時に配列を取得
+      const listItemText = ($.trim($(this).text())); // 先頭と末尾から空白を削除して格納
       console.log(listAreaId);
-      console.log(textDataArray);
-
+      for (let i = 0; i < textDataArray.length; i++) {
+        if (textDataArray[i].text === listItemText) {
+          const iPos = i;
+          textDataArray[iPos].category = listAreaId;
+          console.log(listAreaId);
+          console.log(textDataArray[iPos].category);
+          console.log(textDataArray);
+          storage.sendStorage(textDataArray);
+        }
+      }
     },
     // -----------------------------------------------
   });
@@ -35,14 +44,3 @@ $('.p-task-listArea').droppable({
     listAreaId = $(this).attr('id'); //受け入れ先のIDを取得
   }
 });
-
-//   for(let i = 0; i < textDataArray.length; i++) {
-//     if(textDataArray[i].text === $.trim(listItemText)) {
-//     let iPos = i;
-//     // console.log(iPos);
-//     // console.log(textDataArray[iPos]);
-//     console.log(textDataArray);
-//     textDataArray.splice(iPos, 1);
-//     console.log(textDataArray);
-//   }
-// }
