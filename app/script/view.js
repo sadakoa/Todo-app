@@ -180,8 +180,6 @@ const putArrayData = (aListItem, aListItemText, newTextData) => {
 
       // 配列から削除
       textDataArray.splice(iPos, 1);
-      // ストレージから要素を削除
-      storage.removeStorage(textDataArray);
 
       // リストが所属するカードのカテゴリ
       const selectValue = aListItem.parent().attr('id');
