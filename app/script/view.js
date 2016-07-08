@@ -169,7 +169,7 @@ const putArrayData = (aListItem, aListItemText, newTextData) => {
     // もし配列のtextキーに当てはまる要素があったら
     if (textDataArray[i].text === $.trim(aListItemText)) {
       // 当てはまった要素の位置
-      const iPos = i;
+      let iPos = i;
 
       // 配列から削除
       textDataArray.splice(iPos, 1);

@@ -19,3 +19,7 @@ simple todo application.
   % gulp build // compile
 
   % gulp // watch and compile
+
+## 説明
+
+  distが静的ファイルです

@@ -38,7 +38,7 @@ export const initialize = () => {
   // もしローカルストレージにログデータがあれば配列分生成
   if (logData !== null) {
     for (let i = 0; i < logData.length; i++) {
-      const pEl = $(`<p class="p-task-log">${logData[i].taskName}</p>`);
+      let pEl = $(`<p class="p-task-log">${logData[i].taskName}</p>`);
       $('.log-area').append(pEl);
     }
   }

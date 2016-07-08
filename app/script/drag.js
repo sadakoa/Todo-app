@@ -33,7 +33,7 @@ export const dragEvent = () => {
         // もしマッチしたら処理を行う
         if (textDataArray[i].text === listItemText) {
           // マッチした要素の配列位置
-          const iPos = i;
+          let iPos = i;
           // もし指定領域にスナップされたらlistAreaIdを上書きする
           if (listAreaId !== null) {
             textDataArray[iPos].category = listAreaId;
