@@ -12,7 +12,9 @@ import * as view from './view'; // DOM要素に関係する関数
  * closeModal - モーダルを閉じる関数
  */
 const closeModal = () => {
-  $('.c-modal').remove();
+  $('.c-modal').fadeOut(300).queue(function() {
+    $(this).remove();
+  });
 };
 
 // ========================================================================
@@ -49,8 +51,9 @@ const renderModal = (aButtonId) => {
     </div>
   `);
 
-  $(modal).append(modalContent);
-  $('.l-wrapper').before(modal);
+  modal.append(modalContent);
+  modal.insertBefore('.l-wrapper').hide().fadeIn(300);
+
 
   const newTaskInput = $('.new-task-input');
   optimizeInput(newTaskInput);
