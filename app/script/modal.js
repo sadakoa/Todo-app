@@ -18,26 +18,41 @@ const closeModal = () => {
 // ========================================================================
 
 /**
+ * optimizeInput - inputを最適化する関数
+ * @param  {undefined} e タスクの入力欄
+ */
+const optimizeInput = (e) => {
+  e.focus();
+};
+
+// ========================================================================
+
+/**
  * renderModal - モーダルを生成する関数
  */
 const renderModal = () => {
-  const modal = $('<div>').addClass('c-modal').css('display', 'block');
+  const modal = $('<div>').addClass('c-modal').show();
   const modalContent = $(`
     <div class="c-modal__content">
       <a class="c-modal__cancel">×</a>
       <h3 class="c-modal__title">タスクを作成する</h3>
-      <div class="new-task-area">
-        <input placeholder="タスク名を書いてください" class="new-task-input">
-        <select class="new-task-category">
-          <option value="backlog">Backlog</option>
-          <option value="doing">Doing</option>
-        </select>
-      </div>
-      <button class="c-button is-create new-task-saveButton">タスクを作成</button>
+      <form class="new-task-form" onsubmit="return false;">
+        <div class="new-task-area">
+          <input placeholder="タスク名を書いてください" class="new-task-input" type="text">
+          <select class="new-task-category">
+            <option value="backlog">Backlog</option>
+            <option value="doing">Doing</option>
+          </select>
+        </div>
+        <button class="c-button is-create new-task-saveButton">タスクを作成</button>
+      </form>
     </div>
   `);
   $(modal).append(modalContent);
   $('.l-wrapper').before(modal);
+
+  const newTaskInput = $('.new-task-input');
+  optimizeInput(newTaskInput);
 };
 
 // ========================================================================
@@ -46,10 +61,22 @@ const renderModal = () => {
  * openModal - モーダルを開く関数
  */
 export const openModal = () => {
+  // モーダルを生成
   renderModal();
-  const modalCancel = $('.c-modal__cancel');
-  // 閉じるボタンを押したらモーダルを削除
+  const [modal, modalContent, modalCancel] = [
+    $('.c-modal'),           // 全体領域
+    $('.c-modal__content'),  // 内包要素
+    $('.c-modal__cancel'),   // キャンセルボタン
+  ];
+
+  // 閉じるボタン or 背景を押したらモーダルを削除
+  modal.on('click', closeModal);
   modalCancel.on('click', closeModal);
+
+  // 内包要素なら削除イベントを停止
+  modalContent.on('click', (e) => {
+    e.stopPropagation();
+  });
 
   // タスク作成ボタンを変数に格納
   const saveTaskButton = $('.new-task-saveButton');
