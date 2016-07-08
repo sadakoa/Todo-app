@@ -20,11 +20,14 @@ export const dragEvent = () => {
   $('.c-sticky').draggable({
     snap: '.p-task-listArea', // スナップさせる領域
     snapMode: 'inner',        // スナップの判定
-    opacity: 0.4,             // ドラッグ時の透明度
     revert: 'invalid',        // 指定領域以外はスナップできないに
 
+    start: function(evt, ui) {
+      $(this).addClass('is-drag');
+    },
     // ドラッグ操作を終了時に呼び出される関数
     stop: function(evt, ui) {
+      $(this).removeClass('is-drag');
       const textDataArray = JSON.parse(localStorage.getItem('data'));
       // 先頭と末尾から空白を削除して格納
       const listItemText = ($.trim($(this).text()));
