@@ -30,7 +30,7 @@ const optimizeInput = (e) => {
 /**
  * renderModal - モーダルを生成する関数
  */
-const renderModal = () => {
+const renderModal = (aButtonId) => {
   const modal = $('<div>').addClass('c-modal').show();
   const modalContent = $(`
     <div class="c-modal__content">
@@ -48,11 +48,17 @@ const renderModal = () => {
       </form>
     </div>
   `);
+
   $(modal).append(modalContent);
   $('.l-wrapper').before(modal);
 
   const newTaskInput = $('.new-task-input');
   optimizeInput(newTaskInput);
+
+  // もしdoingカードの作成ボタンが押されたらカテゴリ名の初期値をdoingに変更
+  if (aButtonId === 'doingAddButton') {
+    $('.new-task-category').val('doing');
+  }
 };
 
 // ========================================================================
@@ -60,9 +66,9 @@ const renderModal = () => {
 /**
  * openModal - モーダルを開く関数
  */
-export const openModal = () => {
+export const openModal = (aButtonId) => {
   // モーダルを生成
-  renderModal();
+  renderModal(aButtonId);
   const [modal, modalContent, modalCancel] = [
     $('.c-modal'),           // 全体領域
     $('.c-modal__content'),  // 内包要素

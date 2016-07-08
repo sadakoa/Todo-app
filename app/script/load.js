@@ -71,7 +71,10 @@ export const setEvent = () => {
   // 新規でタスクを作成するボタン
   $('.new-task-button').on('click', modal.openModal);
   // カテゴリからタスクを作成するボタン
-  $('.p-task-addButton').on('click', modal.openModal);
+  $('.p-task-addButton').on('click', function(e) {
+    let buttonId = $(this).attr('id');
+    modal.openModal(buttonId);
+  });
   // 全てのタスクを削除ボタン
   $('.p-task-wholeArea__text--anchor').on('click', view.removeAllListItem);
   // li要素の編集ボタンにイベントを設定
