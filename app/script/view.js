@@ -24,6 +24,13 @@ if (textDataArray === null) {
 export const addListItem = () => {
   // inputに記入された文字を変数に格納
   const inputValue = $('.new-task-input').val();
+
+  // もしinputの入力欄が空ならここで処理を止める
+  if (!inputValue) {
+    alert('何も入力されていません！');
+    return;
+  }
+
   // 選択されたoptionを変数に格納
   const selectValue = $('.new-task-category').val();
   const listItem = $(`
