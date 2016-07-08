@@ -73,7 +73,6 @@ export const setEvent = () => {
   // カテゴリからタスクを作成するボタン
   $('.p-task-addButton').on('click', function(e) {
     let buttonId = $(this).attr('id');
-    console.log(buttonId);
     modal.openModal(buttonId);
   });
   // 全てのタスクを削除ボタン
