@@ -67,16 +67,6 @@ export const addListItem = () => {
 // ========================================================================
 
 /**
- * removeAllListItem - 全てのリストを削除する関数
- */
-export const removeAllListItem = () => {
-  $('.p-task-listArea').empty();
-  storage.removeAllStorage();
-};
-
-// =========================================================================
-
-/**
  * renderlistItem - li要素を生成する関数
  *
  * @param  {array} storageData 配列データ
@@ -88,6 +78,16 @@ export const renderlistItem = (storageData, i) => {
     <img src="images/edit.png" width="20" class="p-task-edit__img"></a></li>
   `);
   return listItem;
+};
+
+// =========================================================================
+
+/**
+ * removeAllListItem - 全てのリストを削除する関数
+ */
+export const removeAllListItem = () => {
+  $('.p-task-listArea').empty();
+  storage.removeAllStorage();
 };
 
 // ========================================================================
@@ -118,6 +118,22 @@ export const removeListItem = (aListItem, aListItemText) => {
 // ========================================================================
 
 /**
+ * passTaskEvent - 編集が終わった後に再度モーダルに変数を渡す
+ * @param  {undefined} aListItem 各リスト要素
+ */
+const passTaskEvent = (aListItem) => {
+   // 各リストの編集ボタンを変数に格納
+  const EditTaskButton = $(aListItem).find('.p-task-edit');
+ // イベント関数の初期化
+  EditTaskButton.on('click', function (evt) {
+    const [editEl, listItemText] = [$(this), $(this).parent().text()];
+    modal.openEditModal(editEl, aListItem, listItemText);
+  });
+};
+
+// ========================================================================
+
+/**
  * AgainSetEdit - 保存後に要素を書き換え、イベントを再設定する関数
  *
  * @param  {string} aListItem   各リスト要素
@@ -130,14 +146,7 @@ const AgainSetEdit = (aListItem, aInputEl, aTaskEditEl) => {
   const newTextData = aInputEl.val();
   // リストの中身を空にして要素を再生成する
   aListItem.empty().text(newTextData).append(aTaskEditEl);
-
-  // 各リストの編集ボタンを変数に格納
-  const EditTaskButton = $(aListItem).find('.p-task-edit');
-  // イベント関数の初期化
-  EditTaskButton.on('click', function (evt) {
-    const [editEl, listItemText] = [$(this), $(this).parent().text()];
-    modal.openEditModal(editEl, aListItem, listItemText);
-  });
+  passTaskEvent(aListItem);
   return newTextData;
 };
 
@@ -153,13 +162,7 @@ const AgainSetEdit = (aListItem, aInputEl, aTaskEditEl) => {
 const cancelEdit = (aListItem, aListItemText, aTaskEditEl) => {
   // リストの中身を空にして要素を再生成する
   aListItem.empty().text(aListItemText).append(aTaskEditEl);
-  // 各リストの編集ボタンを変数に格納
-  const EditTaskButton = $(aListItem).find('.p-task-edit');
-  // イベント関数の初期化
-  EditTaskButton.on('click', function (evt) {
-    const [editEl, listItemText] = [$(this), $(this).parent().text()];
-    modal.openEditModal(editEl, aListItem, listItemText);
-  });
+  passTaskEvent(aListItem);
 };
 
 // ========================================================================
@@ -177,17 +180,14 @@ const putArrayData = (aListItem, aListItemText, newTextData) => {
     if (textDataArray[i].text === $.trim(aListItemText)) {
       // 当てはまった要素の位置
       let iPos = i;
-
       // 配列から削除
       textDataArray.splice(iPos, 1);
-
       // リストが所属するカードのカテゴリ
       const selectValue = aListItem.parent().attr('id');
       // 削除した位置に新規で配列にデータを追加
       textDataArray.splice(iPos, 0, {
         text: newTextData, category: selectValue,
       });
-
       // ストレージデータを更新
       storage.sendStorage(textDataArray);
       break;
