@@ -59,26 +59,39 @@
 .p-task-listArea
   display flex
   flex-wrap: wrap
-  min-height 200px
+  // background: red
+  height: 80%
 
 .c-sticky
-  height: 69px
   cursor pointer
   background #fff
+  color: #fff
   box-shadow: 0 2px 0px #BFBFBF
-  font-size 18px
+  font-size 14px
+  font-weight bold
   border: 1px solid #BFBFBF
   border-radius 4px
-  width: 30%
-  padding: 20px 50px 20px 20px
+  width: 20%
+  text-align center
+  padding: 40px 20px 20px
   margin: 0 20px 20px 0
   position: relative
   z-index: 2
 
+#backlog .c-sticky
+  background #2196F3
+
+#doing .c-sticky
+  background #EF9831
+
+#done .c-sticky
+  background #CB2B55
+
 .p-task-edit
   position absolute
-  top 27%
-  right 20px
+  top 0
+  right 0
+  padding 10px 15px 10px 10px
 
 .is-drag
   transform rotate(7deg)
